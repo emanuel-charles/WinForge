@@ -1,0 +1,23 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Logs e arquivos temporários
+*.log
+*.tmp
+*.bak
+*.swp
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/
+
+# PowerShell
+*.ps1xml
+*Zone.Identifier
