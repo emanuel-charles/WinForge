@@ -13,7 +13,7 @@ Transforme um Windows recém-formatado em um ambiente pronto para produção, es
 
 [Recursos](#-recursos-principais) •
 [Como Usar](#-como-usar) •
-[Versões Disponíveis](#-compara%C3%A7%C3%A3o-de-vers%C3%B5es) •
+[Modos de Instalação](#-modos-de-instala%C3%A7%C3%A3o) •
 [Programas Inclusos](#-programas-essenciais-instalados) •
 [Segurança](#-seguran%C3%A7a-e-transpar%C3%AAncia) •
 [Licença](#-licen%C3%A7a)
@@ -37,43 +37,53 @@ O **WinForge** automatiza todo esse fluxo com inteligência de hardware, seguran
 ## 🚀 Como Usar
 
 ### Opção 1: Execução Direta pelo PowerShell (Recomendado)
-Abra o **PowerShell como Administrador** e cole um dos comandos abaixo:
+Abra o **PowerShell como Administrador** e cole o comando abaixo:
 
-#### 🔹 Versão Completa:
 ```powershell
 irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge.ps1 | iex
 ```
 
-#### ⚡ Versão Express (Ultra Rápida ~2 a 3 min):
-```powershell
-irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Express.ps1 | iex
+Logo ao abrir, o WinForge pergunta qual modo de instalação usar:
+
 ```
+Escolha o modo de instalacao:
+  [1] Completa (~6 a 8 min) - drivers via Windows Update, driver oficial de GPU e 12 programas
+  [2] Express  (~2 a 3 min) - mesmos ajustes, drivers so se houver alerta e 5 programas essenciais
+
+Opcao (1/2) [Padrao: 1]
+```
+
+Pressionar **ENTER** sem digitar nada escolhe o modo **Completo**. Veja as diferenças em [Modos de Instalação](#-modos-de-instala%C3%A7%C3%A3o).
 
 ---
 
 ### Opção 2: Execução Local
-1. Baixe este repositório ou o script desejado (`WinForge.ps1` ou `WinForge-Express.ps1`).
+1. Baixe o arquivo `WinForge.ps1` deste repositório.
 2. Clique com o botão direito no arquivo `.ps1` e selecione **"Executar com o PowerShell"** *(ou execute pelo terminal como Administrador)*.
-3. Se o script não estiver rodando como Administrador, ele solicitará elevação automaticamente (inclusive quando executado via `irm | iex`).
+3. Se o script não estiver rodando como Administrador, ele solicitará elevação automaticamente (inclusive quando executado via `irm | iex`). O menu de modos aparece já na janela de Administrador.
 
-> Ao final, a janela permanece aberta com o relatório de execução até você pressionar **ENTER**. Um log completo de cada execução é salvo na **Área de Trabalho** (`WinForge-<data_hora>.log` ou `WinForge-Express-<data_hora>.log`).
+> Ao final, a janela permanece aberta com o relatório de execução até você pressionar **ENTER**. Um log completo de cada execução é salvo na **Área de Trabalho** (`WinForge-<data_hora>.log`), com o modo escolhido registrado no início.
 
 ---
 
-## 📊 Comparação de Versões
+## 📊 Modos de Instalação
 
-| Recurso / Etapa | WinForge (Completo) | WinForge Express |
+Os dois modos fazem os mesmos ajustes de sistema. O **Express** economiza tempo em três pontos: só busca drivers no Windows Update quando algum dispositivo está com alerta, apenas verifica a placa de vídeo (sem baixar driver) e instala só os 5 programas essenciais.
+
+| Recurso / Etapa | Completo | Express |
 | :--- | :---: | :---: |
 | **Tempo Médio de Execução** | ~6 a 8 minutos | **~2 a 3 minutos** |
 | **Elevação Automática para Administrador** | Sim | Sim |
 | **Verificação de Conexão com a Internet** | Sim (com modo offline) | Sim (com modo offline) |
+| **Ativação dos Serviços do Windows Update** | Sim | Sim |
 | **Plano de Energia de Desempenho Máximo** | Sim | Sim |
 | **Desativação de Hibernação e Telemetria Básica** | Sim | Sim |
 | **Tema Escuro, Win+V e Fuso de Brasília** | Sim | Sim |
 | **Desativação de Bing, Widgets e Anúncios** | Sim | Sim |
-| **Diagnóstico de Placa-Mãe e Áudio Realtek** | Sim (com link direto se ausente) | Sim |
-| **Detecção Inteligente de GPU (NVIDIA/AMD/Intel)** | Download oficial se ausente | Checagem de status rápido |
-| **Busca de Drivers no Windows Update** | Completa (Drivers + Opcionais se pendentes) | Apenas se houver alertas PnP |
+| **Diagnóstico de Placa-Mãe e Áudio Realtek** | Sim (com link direto se ausente) | Sim (com link direto se ausente) |
+| **Busca de Drivers no Windows Update** | Sempre (Drivers + Opcionais se pendentes) | Apenas se houver alertas PnP |
+| **Detecção Inteligente de GPU (NVIDIA/AMD/Intel Arc)** | Download do driver oficial se ausente | Apenas verificação (aviso no relatório se ausente) |
+| **Validação e Instalação Automática do Winget** | Sim | Sim |
 | **Pacote de Softwares (via Winget)** | 12 Softwares Essenciais | 5 Softwares Core Essenciais |
 | **Nova Tentativa Automática em Falhas de Instalação** | Sim | Sim |
 | **Limpeza Segura de Temporários** | Sim | Sim |
@@ -113,7 +123,7 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 
 ## 🛠 Programas Essenciais Instalados
 
-### Na versão Completa (`WinForge.ps1`):
+### No modo Completo:
 - **Navegador**: Google Chrome
 - **Documentos**: Foxit PDF Reader
 - **Suporte Remoto**: AnyDesk
@@ -123,12 +133,12 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 - **Diagnóstico & Utilidades**: CrystalDiskInfo (Saúde de SSD/HD), CPU-Z (Hardware) e Geek Uninstaller
 - **Comunicação**: WhatsApp Desktop
 
-### Na versão Express (`WinForge-Express.ps1`):
+### No modo Express:
 - Google Chrome
-- 7-Zip
 - AnyDesk
-- Visual C++ All-in-One (2005-2022)
+- 7-Zip
 - DirectX Runtimes
+- Visual C++ All-in-One (2005-2022)
 
 ---
 
@@ -140,14 +150,47 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 
 ---
 
+## Desenvolvimento
+
+O `WinForge.ps1` da raiz é **gerado**: a execução via `irm | iex` exige um único arquivo, mas o código é mantido em módulos dentro de `src/`.
+
+| Caminho | Conteúdo |
+| :--- | :--- |
+| `src/00-bootstrap.ps1` | Cabeçalho, TLS e elevação para Administrador |
+| `src/10-helpers.ps1` | Registro, internet, Winget com nova tentativa, espera de instaladores, temporários |
+| `src/15-report.ps1` | Relatório de execução (`Add-Success`, `Add-Warning`, `Add-Failure`) |
+| `src/20-menu.ps1` | Menu de escolha do modo |
+| `src/30-system.ps1` | Hardware, serviços do Windows Update, desempenho e interface |
+| `src/40-drivers.ps1` | Varredura PnP, drivers via Windows Update e diagnóstico de áudio |
+| `src/50-gpu.ps1` | Placa de vídeo (NVIDIA, AMD, Intel Arc) |
+| `src/60-apps.ps1` | Catálogo de programas, Winget e instalação |
+| `src/70-cleanup.ps1` | Limpeza de temporários |
+| `src/80-activation.ps1` | Verificação e ativação do Windows |
+| `src/99-main.ps1` | Log, menu e ordem das etapas |
+
+Para alterar o script:
+
+```powershell
+# 1. Edite os arquivos em src/
+# 2. Gere o WinForge.ps1 (falha se houver erro de sintaxe ou acento em strings)
+./build.ps1
+# 3. Rode os testes (Pester 5 ou superior)
+Invoke-Pester -Path ./tests
+```
+
+As mensagens exibidas pelo script usam apenas caracteres ASCII: o Windows PowerShell 5.1 lê arquivos UTF-8 sem BOM como ANSI e corromperia acentos. Comentários podem ter acento. O CI recusa um `WinForge.ps1` que não corresponda ao resultado do `build.ps1`.
+
+---
+
 ## 🤝 Contribuições
 
 Contribuições, correções de bugs e sugestões de novas melhorias são muito bem-vindas!
 1. Faça um Fork do projeto
 2. Crie sua Feature Branch (`git checkout -b feature/NovaMelhoria`)
-3. Faça Commit das suas alterações (`git commit -m 'Adiciona suporte a X'`)
-4. Faça Push para a Branch (`git push origin feature/NovaMelhoria`)
-5. Abra um Pull Request
+3. Edite os módulos em `src/`, rode `./build.ps1` e os testes
+4. Faça Commit das suas alterações, incluindo o `WinForge.ps1` gerado (`git commit -m 'feat: adiciona suporte a X'`)
+5. Faça Push para a Branch (`git push origin feature/NovaMelhoria`)
+6. Abra um Pull Request
 
 ---
 
