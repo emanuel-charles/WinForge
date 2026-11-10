@@ -21,3 +21,6 @@ $RECYCLE.BIN/
 # PowerShell
 *.ps1xml
 *Zone.Identifier
+
+# Resultados do Pester
+testResults.xml
