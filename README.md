@@ -54,7 +54,9 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 ### Opção 2: Execução Local
 1. Baixe este repositório ou o script desejado (`WinForge.ps1` ou `WinForge-Express.ps1`).
 2. Clique com o botão direito no arquivo `.ps1` e selecione **"Executar com o PowerShell"** *(ou execute pelo terminal como Administrador)*.
-3. Se o script não estiver rodando como Administrador, ele solicitará elevação automaticamente.
+3. Se o script não estiver rodando como Administrador, ele solicitará elevação automaticamente (inclusive quando executado via `irm | iex`).
+
+> Ao final, a janela permanece aberta com o relatório de execução até você pressionar **ENTER**. Um log completo de cada execução é salvo na **Área de Trabalho** (`WinForge-<data_hora>.log` ou `WinForge-Express-<data_hora>.log`).
 
 ---
 
@@ -73,8 +75,9 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 | **Detecção Inteligente de GPU (NVIDIA/AMD/Intel)** | Download oficial se ausente | Checagem de status rápido |
 | **Busca de Drivers no Windows Update** | Completa (Drivers + Opcionais se pendentes) | Apenas se houver alertas PnP |
 | **Pacote de Softwares (via Winget)** | 12 Softwares Essenciais | 5 Softwares Core Essenciais |
-| **Google Chrome como Navegador Padrão** | Sim | Sim |
-| **Limpeza Rápida de Temporários** | Sim | Sim |
+| **Nova Tentativa Automática em Falhas de Instalação** | Sim | Sim |
+| **Limpeza Segura de Temporários** | Sim | Sim |
+| **Relatório Final e Log na Área de Trabalho** | Sim | Sim |
 | **Verificação e Ativação do Windows com Proteção de AV** | Sim | Sim |
 
 ---
@@ -103,14 +106,15 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 ### 4. 📦 Gerenciamento de Programas via Winget Oficial
 - Valida e recupera o **Windows Package Manager (Winget)** automaticamente caso esteja corrompido ou ausente no Windows recém-instalado.
 - Instala programas silenciosamente, sem lixo promocional (*crapware/adware*).
-- Define o **Google Chrome** automaticamente como navegador web padrão do sistema.
+- Tenta novamente, de forma automática, cada programa que falhar na primeira instalação (após atualizar as fontes do Winget); falhas persistentes aparecem no relatório final sem interromper as demais instalações.
+- Limpa apenas arquivos temporários com mais de 1 hora, depois que nenhum instalador estiver em execução.
 
 ---
 
 ## 🛠 Programas Essenciais Instalados
 
 ### Na versão Completa (`WinForge.ps1`):
-- **Navegador**: Google Chrome *(configurado como padrão)*
+- **Navegador**: Google Chrome
 - **Documentos**: Foxit PDF Reader
 - **Suporte Remoto**: AnyDesk
 - **Compactadores**: WinRAR e 7-Zip
@@ -120,7 +124,7 @@ irm https://raw.githubusercontent.com/emanuel-charles/WinForge/main/WinForge-Exp
 - **Comunicação**: WhatsApp Desktop
 
 ### Na versão Express (`WinForge-Express.ps1`):
-- Google Chrome *(Padrão)*
+- Google Chrome
 - 7-Zip
 - AnyDesk
 - Visual C++ All-in-One (2005-2022)
