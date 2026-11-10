@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Pester
+        run: Install-Module Pester -MinimumVersion 5.5.0 -Scope CurrentUser -Force -SkipPublisherCheck
+
+      - name: Build WinForge.ps1
+        run: ./build.ps1
+
+      - name: Check that WinForge.ps1 is in sync with src/
+        run: |
+          git diff --exit-code -- WinForge.ps1
+          if ($LASTEXITCODE -ne 0) {
+            Write-Error "WinForge.ps1 esta desatualizado. Rode ./build.ps1 e faca commit do resultado."
+            exit 1
+          }
+
+      - name: Run tests
+        run: Invoke-Pester -Path ./tests -CI
